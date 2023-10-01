@@ -1,5 +1,6 @@
 name: Build Tools AMD64
 on:
+  workflow_dispatch:
   push:
     branches: [ main ]
     paths:
@@ -30,7 +31,7 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
     - name: Extract metadata (tags, labels) for Docker
       id: meta
-      uses: docker/metadata-action@v3
+      uses: docker/metadata-action@v5
       with:
          images: ${{ env.REGISTRY }}/${{ github.actor }}/${{ env.IMAGE_NAME }}
          tags: |
@@ -40,7 +41,6 @@ jobs:
       with:
         context: ./tools
         file: ./tools/Dockerfile.arm64
-        platforms: linux/amd64
         push: true
         tags: ${{ steps.meta.outputs.tags }}
       
