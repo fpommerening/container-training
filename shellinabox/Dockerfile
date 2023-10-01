@@ -1,6 +1,6 @@
 ARG TARGETARCH
 ARG TARGETVARIANT
-FROM alpine as plattform
+FROM ghcr.io/fpommerening/container-training.tools:linux-amd64 as tools
 RUN echo "I'm building for $TARGETARCH - $TARGETVARIANT"
 
 FROM ubuntu:22.04
@@ -29,8 +29,17 @@ ENTRYPOINT ["entrypoint.sh"]
 CMD ["shellinabox"]
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN mkdir /usr/local/lib/docker && /usr/local/lib/docker/cli-plugins
 
-RUN apt-get update && apt-get install -y openssl curl openssh-client sudo shellinabox git && \
+COPY --from=tools /tools/kubectl/kubectl /usr/local/bin/kubectl 
+COPY --from=tools /tools/k9s/k9s /usr/local/bin/k9s 
+COPY --from=tools /tools/helm/helm /usr/local/bin/helm 
+COPY --from=tools /tools/linkerd/linkerd /usr/local/bin/linkerd 
+COPY --from=tools /tools/docker/docker /usr/local/bin/docker 
+COPY --from=tools /tools/docker/docker-compose /usr/local/lib/docker/cli-plugins/docker-compose 
+ADD entrypoint.sh /usr/local/sbin/
+
+RUN apt-get update && apt-get install -y openssl curl openssh-client shellinabox git && \
     ln -sf '/etc/shellinabox/options-enabled/00+Black on White.css' \
       /etc/shellinabox/options-enabled/00+Black-on-White.css && \
     ln -sf '/etc/shellinabox/options-enabled/00_White On Black.css' \
@@ -38,26 +47,6 @@ RUN apt-get update && apt-get install -y openssl curl openssh-client sudo shelli
     ln -sf '/etc/shellinabox/options-enabled/01+Color Terminal.css' \
       /etc/shellinabox/options-enabled/01+Color-Terminal.css && \
     apt-get install -y apt-transport-https gnupg wget mc nano && \
-    sudo curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && \
-    sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl && \
-    wget 'https://github.com/derailed/k9s/releases/download/v0.26.7/k9s_Linux_x86_64.tar.gz' && \
-    mkdir /tmp/k9s/ && tar -xvf k9s_Linux_x86_64.tar.gz -C /tmp/k9s/ && \
-    mv /tmp/k9s/k9s /usr/local/bin/k9s && \
-    rm k9s_Linux_x86_64.tar.gz && rm -R /tmp/k9s && \
-    wget https://get.helm.sh/helm-v3.10.1-linux-amd64.tar.gz && \
-    mkdir /tmp/helm && tar -xvf helm-v3.10.1-linux-amd64.tar.gz -C /tmp/helm && \  
-    mv /tmp/helm/linux-amd64/helm /usr/local/bin/helm && \
-    rm helm-v3.10.1-linux-amd64.tar.gz && rm -R /tmp/helm  && \
-    wget 'https://github.com/linkerd/linkerd2/releases/download/stable-2.12.2/linkerd2-cli-stable-2.12.2-linux-amd64' && \
-    chmod +x linkerd2-cli-stable-2.12.2-linux-amd64 &&  mv linkerd2-cli-stable-2.12.2-linux-amd64 /usr/local/bin/linkerd && \
-    wget https://download.docker.com/linux/static/stable/x86_64/docker-24.0.6.tgz && \
-    mkdir /tmp/docker && tar -xvf docker-24.0.6.tgz -C /tmp/docker && \  
-    mv /tmp/docker/docker/docker /usr/local/bin/docker && \
-    rm docker-24.0.6.tgz && rm -R /tmp/docker  && \
-	  mkdir /usr/local/lib/docker/ && mkdir /usr/local/lib/docker/cli-plugins && \
-	  curl -SL https://github.com/docker/compose/releases/download/v2.12.2/docker-compose-linux-x86_64 -o /usr/local/lib/docker/cli-plugins/docker-compose && \
-	  chmod +x /usr/local/lib/docker/cli-plugins/docker-compose && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ADD entrypoint.sh /usr/local/sbin/
