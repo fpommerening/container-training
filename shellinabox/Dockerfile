@@ -1,9 +1,8 @@
-ARG TARGETARCH
-ARG TARGETVARIANT
-FROM ghcr.io/fpommerening/container-training.tools:linux-amd64 as tools
-RUN echo "I'm building for $TARGETARCH - $TARGETVARIANT"
+FROM --platform=linux/amd64
+ghcr.io/fpommerening/container-training.tools:linux-amd64 as tools-amd64
 
 FROM ubuntu:22.04
+ARG TARGETARCH
 
 ENV SIAB_USERCSS="Normal:+/etc/shellinabox/options-enabled/00+Black-on-White.css,Reverse:-/etc/shellinabox/options-enabled/00_White-On-Black.css;Colors:+/etc/shellinabox/options-enabled/01+Color-Terminal.css,Monochrome:-/etc/shellinabox/options-enabled/01_Monochrome.css" \
     SIAB_PORT=4200 \
@@ -31,12 +30,12 @@ CMD ["shellinabox"]
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN mkdir /usr/local/lib/docker && mkdir /usr/local/lib/docker/cli-plugins
 
-COPY --from=tools /tools/kubectl/kubectl /usr/local/bin/kubectl 
-COPY --from=tools /tools/k9s/k9s /usr/local/bin/k9s 
-COPY --from=tools /tools/helm/helm /usr/local/bin/helm 
-COPY --from=tools /tools/linkerd/linkerd /usr/local/bin/linkerd 
-COPY --from=tools /tools/docker/docker /usr/local/bin/docker 
-COPY --from=tools /tools/docker/docker-compose /usr/local/lib/docker/cli-plugins/docker-compose 
+COPY --from=tools-{TARGETARCH} /tools/kubectl/kubectl /usr/local/bin/kubectl 
+COPY --from=tools-{TARGETARCH} /tools/k9s/k9s /usr/local/bin/k9s 
+COPY --from=tools-{TARGETARCH} /tools/helm/helm /usr/local/bin/helm 
+COPY --from=tools-{TARGETARCH} /tools/linkerd/linkerd /usr/local/bin/linkerd 
+COPY --from=tools-{TARGETARCH} /tools/docker/docker /usr/local/bin/docker 
+COPY --from=tools-{TARGETARCH} /tools/docker/docker-compose /usr/local/lib/docker/cli-plugins/docker-compose 
 ADD entrypoint.sh /usr/local/sbin/
 
 RUN apt-get update && apt-get install -y openssl curl openssh-client shellinabox git && \
