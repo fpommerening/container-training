@@ -4,7 +4,7 @@ RUN apt-get update && apt-get install -y curl sudo git apt-transport-https gnupg
 RUN sudo curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 RUN sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 RUN wget 'https://github.com/derailed/k9s/releases/download/v0.27.4/k9s_Linux_amd64.tar.gz' && \
-    mkdir /tmp/k9s/ && tar -xvf kk9s_Linux_amd64.tar.gz -C /tmp/k9s/ && \
+    mkdir /tmp/k9s/ && tar -xvf k9s_Linux_amd64.tar.gz -C /tmp/k9s/ && \
     mv /tmp/k9s/k9s /usr/local/bin/k9s
 
 RUN wget https://get.helm.sh/helm-v3.13.0-linux-amd64.tar.gz && \
