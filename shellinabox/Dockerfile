@@ -29,7 +29,7 @@ ENTRYPOINT ["entrypoint.sh"]
 CMD ["shellinabox"]
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-RUN mkdir /usr/local/lib/docker && mdir /usr/local/lib/docker/cli-plugins
+RUN mkdir /usr/local/lib/docker && mkdir /usr/local/lib/docker/cli-plugins
 
 COPY --from=tools /tools/kubectl/kubectl /usr/local/bin/kubectl 
 COPY --from=tools /tools/k9s/k9s /usr/local/bin/k9s 
