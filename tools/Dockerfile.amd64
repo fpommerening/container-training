@@ -3,23 +3,23 @@ FROM ubuntu:22.04 as download
 RUN apt-get update && apt-get install -y curl sudo git apt-transport-https gnupg wget
 RUN sudo curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 RUN sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-RUN wget 'https://github.com/derailed/k9s/releases/download/v0.26.7/k9s_Linux_x86_64.tar.gz' && \
-    mkdir /tmp/k9s/ && tar -xvf k9s_Linux_x86_64.tar.gz -C /tmp/k9s/ && \
+RUN wget 'https://github.com/derailed/k9s/releases/download/v0.27.4/k9s_Linux_amd64.tar.gz' && \
+    mkdir /tmp/k9s/ && tar -xvf kk9s_Linux_amd64.tar.gz -C /tmp/k9s/ && \
     mv /tmp/k9s/k9s /usr/local/bin/k9s
 
 RUN wget https://get.helm.sh/helm-v3.13.0-linux-amd64.tar.gz && \
     mkdir /tmp/helm && tar -xvf helm-v3.13.0-linux-amd64.tar.gz -C /tmp/helm && \  
     mv /tmp/helm/linux-amd64/helm /usr/local/bin/helm
 
-RUN wget 'https://github.com/linkerd/linkerd2/releases/download/stable-2.12.2/linkerd2-cli-stable-2.12.2-linux-amd64' && \
-    chmod +x linkerd2-cli-stable-2.12.2-linux-amd64 &&  mv linkerd2-cli-stable-2.12.2-linux-amd64 /usr/local/bin/linkerd
+RUN wget 'https://github.com/linkerd/linkerd2/releases/download/stable-2.14.1/linkerd2-cli-stable-2.14.1-linux-amd64' && \
+    chmod +x linkerd2-cli-stable-2.14.1-linux-amd64 &&  mv linkerd2-cli-stable-2.14.1-linux-amd64 /usr/local/bin/linkerd
 
 RUN wget https://download.docker.com/linux/static/stable/x86_64/docker-24.0.6.tgz && \
     mkdir /tmp/docker && tar -xvf docker-24.0.6.tgz -C /tmp/docker && \  
     mv /tmp/docker/docker/docker /usr/local/bin/docker
 
 RUN mkdir /usr/local/lib/docker/ && mkdir /usr/local/lib/docker/cli-plugins && \
-	curl -SL https://github.com/docker/compose/releases/download/v2.12.2/docker-compose-linux-x86_64 -o /usr/local/lib/docker/cli-plugins/docker-compose && \
+	curl -SL https://github.com/docker/compose/releases/download/v2.22.0/docker-compose-linux-x86_64 -o /usr/local/lib/docker/cli-plugins/docker-compose && \
     chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
 
 
