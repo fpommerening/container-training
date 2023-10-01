@@ -2,6 +2,8 @@ name: Build Tools AMD64
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'tools/**'
 
 permissions: 
   packages: write
