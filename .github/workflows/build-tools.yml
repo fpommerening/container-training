@@ -1,4 +1,4 @@
-name: Build Tools AMD64
+name: Build Tools
 on:
   workflow_dispatch:
   push:
@@ -30,7 +30,7 @@ jobs:
         username: ${{ github.repository_owner }}
         password: ${{ secrets.GITHUB_TOKEN }}
     - name: Extract metadata (tags, labels) for Docker
-      id: meta
+      id: meta-amd64
       uses: docker/metadata-action@v5
       with:
          images: ${{ env.REGISTRY }}/${{ github.actor }}/${{ env.IMAGE_NAME }}
@@ -41,6 +41,22 @@ jobs:
       with:
         context: ./tools
         file: ./tools/Dockerfile.amd64
+        platforms: linux/amd64
         push: true
-        tags: ${{ steps.meta.outputs.tags }}
+        tags: ${{ steps.meta-amd64.outputs.tags }}
+    - name: Extract metadata (tags, labels) for Docker
+      id: meta-amd64
+      uses: docker/metadata-action@v5
+      with:
+         images: ${{ env.REGISTRY }}/${{ github.actor }}/${{ env.IMAGE_NAME }}
+         tags: |
+           type=raw,value=linux-arm64
+    - name: Build and push
+      uses: docker/build-push-action@v5
+      with:
+        context: ./tools
+        file: ./tools/Dockerfile.amd64
+        platforms: linux/arm64
+        push: true
+        tags: ${{ steps.meta-arm64.outputs.tags }}
       
