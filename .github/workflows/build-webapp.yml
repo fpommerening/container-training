@@ -40,7 +40,7 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         context: ./webapp/v1
-        platforms: linux/amd64,linux/arm64
+        platforms: linux/amd64,linux/arm64,linux/arm/v7
         push: true
         tags: ${{ steps.meta-v1.outputs.tags }}
         labels: ${{ steps.meta-v1.outputs.labels }}
@@ -55,7 +55,7 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         context: ./webapp/v2
-        platforms: linux/amd64,linux/arm64
+        platforms: linux/amd64,linux/arm64,linux/arm/v7
         push: true
         tags: ${{ steps.meta-v2.outputs.tags }}
         labels: ${{ steps.meta-v2.outputs.labels }}
@@ -70,7 +70,7 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         context: ./webapp/v3
-        platforms: linux/amd64,linux/arm64
+        platforms: linux/amd64,linux/arm64,linux/arm/v7
         push: true
         tags: ${{ steps.meta-v3.outputs.tags }}
         labels: ${{ steps.meta-v3.outputs.labels }}
