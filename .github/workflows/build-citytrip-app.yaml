@@ -31,10 +31,10 @@ jobs:
         dotnet build --no-restore citytrip/app/src/app.csproj
     - name: Publish
       run: |
-        dotnet publish -c release -r linux-x64 -o citytrip/app/amd64 citytrip/app/src/app.csproj
+        dotnet publish -c release -r linux-x64 --no-self-contained -o citytrip/app/amd64 citytrip/app/src/app.csproj
     - name: Publish
       run: |
-        dotnet publish -c release -r linux-arm64 -o citytrip/app/arm64 citytrip/app/src/app.csproj
+        dotnet publish -c release -r linux-arm64 --no-self-contained -o citytrip/app/arm64 citytrip/app/src/app.csproj
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v3
