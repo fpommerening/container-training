@@ -1,4 +1,4 @@
-name: Build CityTrip static
+name: Build CityTrip app
 on:
   workflow_dispatch:
   push:
