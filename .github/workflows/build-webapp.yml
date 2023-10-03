@@ -11,7 +11,7 @@ permissions:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: webapp
+  IMAGE_NAME: container-training.webapp
 
 jobs:
   build:
