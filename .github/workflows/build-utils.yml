@@ -1,4 +1,4 @@
-name: Build Shell in a Box
+name: Build Utils
 on:
   workflow_dispatch:
   push:
