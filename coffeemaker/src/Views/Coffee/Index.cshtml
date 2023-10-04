@@ -1,0 +1,50 @@
+@model FP.ContainerTraining.CoffeeMaker.Models.OrdersViewModel
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Bestellungen</title>
+    <style type="text/css">
+        table {
+            border-collapse: collapse;
+        }
+
+            table td, table th {
+                border: 1px solid black;
+                padding: 5px;
+            }
+    </style>
+</head>
+<body>
+
+<h1>Coffee Maker</h1>
+<br/>
+Instance: @Model.InstanceName <br/><br/>
+
+
+<table>
+    <tr>
+        <th>Erstellt</th>
+        <th>Geliefert</th>
+        <th>Produkt</th>
+    </tr>
+    @{
+        foreach (var order in @Model.Orders)
+        {
+            <tr>
+                <td>@order.CreatedAt.ToString("G")</td>
+                <td>
+                    @if (order.FinishedAt != null)
+                    {
+                        @order.FinishedAt.Value.ToString("G")
+                    }
+                </td>
+                <td>@order.Product</td>
+            </tr>
+        }
+    }
+</table>
+</body>
+</html>
