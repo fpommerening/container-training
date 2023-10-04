@@ -52,7 +52,8 @@ jobs:
       with:
          images: ${{ env.REGISTRY }}/${{ github.actor }}/${{ env.IMAGE_NAME }}
          tags: |
-           type=raw,value=app
+          type=raw,value=1.0.0
+          type=raw,value=latest
     - name: Build and push
       uses: docker/build-push-action@v5
       with:
