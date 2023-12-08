@@ -29,6 +29,9 @@ public class GraphicService : BackgroundService
                     case "lines":
                         await DrawLines();
                         break;
+                    case "tree":
+                        await DrawTree();
+                        break;
                     default:
                         await DrawCross();
                         break;
@@ -82,6 +85,30 @@ public class GraphicService : BackgroundService
         for (var digit = 0; digit < 8; digit++)
         {
             _matrixRepository[0, digit] = smiley[digit];
+        }
+
+        _matrixRepository.Flush();
+        return Task.CompletedTask;
+    }
+    
+    private Task DrawTree()
+    {
+
+        var tree = new byte[]
+        {
+            0x00,
+            0x18,
+            0x18,
+            0x3C,
+            0x3C,
+            0x7E,
+            0x5A,
+            0x18
+        };
+
+        for (var digit = 0; digit < 8; digit++)
+        {
+            _matrixRepository[0, digit] = tree[digit];
         }
 
         _matrixRepository.Flush();
