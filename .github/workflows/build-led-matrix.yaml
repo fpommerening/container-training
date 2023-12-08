@@ -31,7 +31,7 @@ jobs:
         dotnet build --no-restore led-matrix/src/led-matrix.csproj
     - name: Publish
       run: |
-        dotnet publish -c release -r linux-arm32 --no-self-contained -o led-matrix/arm32 led-matrix/src/led-matrix.csproj
+        dotnet publish -c release -r linux-arm --no-self-contained -o led-matrix/arm led-matrix/src/led-matrix.csproj
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v3
@@ -55,7 +55,7 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         context: ./led-matrix
-        platforms: linux/amd32
+        platforms: linux/arm/v7
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
