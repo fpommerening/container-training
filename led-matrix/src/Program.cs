@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<MatrixRepository>();
 builder.Services.AddSingleton<MatrixRunner>();
+builder.Services.AddHostedService<GraphicService>();
 builder.Services.AddHostedService<TextWriterService>();
 
 var app = builder.Build();
