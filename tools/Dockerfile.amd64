@@ -7,6 +7,10 @@ RUN wget 'https://github.com/derailed/k9s/releases/download/v0.29.1/k9s_Linux_am
     mkdir /tmp/k9s/ && tar -xvf k9s_Linux_amd64.tar.gz -C /tmp/k9s/ && \
     mv /tmp/k9s/k9s /usr/local/bin/k9s
 
+RUN wget 'https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.24.5/kubeseal-0.24.5-linux-amd64.tar.gz' && \
+    mkdir /tmp/kubeseal/ && tar -xvf kubeseal-0.24.5-linux-amd64.tar.gz -C /tmp/kubeseal/ && \
+    mv /tmp/kubeseal/kubeseal /usr/local/bin/kubeseal
+
 RUN wget https://get.helm.sh/helm-v3.13.3-linux-amd64.tar.gz && \
     mkdir /tmp/helm && tar -xvf helm-v3.13.3-linux-amd64.tar.gz -C /tmp/helm && \  
     mv /tmp/helm/linux-amd64/helm /usr/local/bin/helm
@@ -27,6 +31,7 @@ FROM busybox
 RUN mkdir /tools && mkdir /tools/kubectl && mkdir /tools/k9s && mkdir /tools/helm && mkdir /tools/docker
 COPY --from=download /usr/local/bin/kubectl /tools/kubectl/kubectl
 COPY --from=download /usr/local/bin/k9s /tools/k9s/k9s
+COPY --from=download /usr/local/bin/kubeseal /tools/k9s/kubeseal
 COPY --from=download /usr/local/bin/helm /tools/helm/helm
 COPY --from=download /usr/local/bin/linkerd /tools/linkerd/linkerd
 COPY --from=download /usr/local/bin/docker /tools/docker/docker
