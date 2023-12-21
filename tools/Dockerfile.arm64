@@ -7,6 +7,10 @@ RUN wget 'https://github.com/derailed/k9s/releases/download/v0.29.1/k9s_Linux_ar
     mkdir /tmp/k9s/ && tar -xvf k9s_Linux_arm64.tar.gz -C /tmp/k9s/ && \
     mv /tmp/k9s/k9s /usr/local/bin/k9s
 
+RUN wget 'https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.24.5/kubeseal-0.24.5-linux-arm64.tar.gz' && \
+    mkdir /tmp/kubeseal/ && tar -xvf kubeseal-0.24.5-linux-arm64.tar.gz -C /tmp/kubeseal/ && \
+    mv /tmp/kubeseal/kubeseal /usr/local/bin/kubeseal
+
 RUN wget https://get.helm.sh/helm-v3.13.3-linux-arm64.tar.gz && \
     mkdir /tmp/helm && tar -xvf helm-v3.13.3-linux-arm64.tar.gz -C /tmp/helm && \  
     mv /tmp/helm/linux-arm64/helm /usr/local/bin/helm
