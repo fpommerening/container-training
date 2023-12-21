@@ -31,6 +31,7 @@ FROM busybox
 RUN mkdir /tools && mkdir /tools/kubectl && mkdir /tools/k9s && mkdir /tools/helm && mkdir /tools/docker
 COPY --from=download /usr/local/bin/kubectl /tools/kubectl/kubectl
 COPY --from=download /usr/local/bin/k9s /tools/k9s/k9s
+COPY --from=download /usr/local/bin/kubeseal /tools/kubeseal/kubeseal
 COPY --from=download /usr/local/bin/helm /tools/helm/helm
 COPY --from=download /usr/local/bin/linkerd /tools/linkerd/linkerd
 COPY --from=download /usr/local/bin/docker /tools/docker/docker
