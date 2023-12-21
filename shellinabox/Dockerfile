@@ -30,6 +30,7 @@ RUN mkdir /usr/local/lib/docker && mkdir /usr/local/lib/docker/cli-plugins
 
 COPY --from=tools /tools/kubectl/kubectl /usr/local/bin/kubectl 
 COPY --from=tools /tools/k9s/k9s /usr/local/bin/k9s 
+COPY --from=tools /tools/kubeseal/kubeseal /usr/local/bin/kubeseal 
 COPY --from=tools /tools/helm/helm /usr/local/bin/helm 
 COPY --from=tools /tools/linkerd/linkerd /usr/local/bin/linkerd 
 COPY --from=tools /tools/docker/docker /usr/local/bin/docker 
