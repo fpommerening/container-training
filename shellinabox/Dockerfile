@@ -38,7 +38,7 @@ COPY --from=tools /tools/docker/docker /usr/local/bin/docker
 COPY --from=tools /tools/docker/docker-compose /usr/local/lib/docker/cli-plugins/docker-compose 
 ADD entrypoint.sh /usr/local/sbin/
 
-RUN apt-get update && apt-get install -y openssl curl openssh-client shellinabox git && \
+RUN apt-get update && apt-get install -y openssl curl openssh-client shellinabox git tmux && \
     ln -sf '/etc/shellinabox/options-enabled/00+Black on White.css' \
       /etc/shellinabox/options-enabled/00+Black-on-White.css && \
     ln -sf '/etc/shellinabox/options-enabled/00_White On Black.css' \
