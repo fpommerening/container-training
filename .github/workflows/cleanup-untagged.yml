@@ -13,5 +13,41 @@ jobs:
         with:
           package-name: 'webapp'
           package-type: 'container'
-          min-versions-to-keep: 5
+          min-versions-to-keep: 1
+          delete-only-untagged-versions: 'true'
+      - uses: actions/delete-package-versions@v4
+        with:
+            package-name: 'monitoring-for-devops'
+            package-type: 'container'
+            min-versions-to-keep: 1
+            delete-only-untagged-versions: 'true'
+      - uses: actions/delete-package-versions@v4
+        with:
+            package-name: 'kxs-for-developers'
+            package-type: 'container'
+            min-versions-to-keep: 1
+            delete-only-untagged-versions: 'true'
+      - uses: actions/delete-package-versions@v4
+        with:
+          package-name: 'kxs-for-developers'
+          package-type: 'container'
+          min-versions-to-keep: 1
+          delete-only-untagged-versions: 'true'
+      - uses: actions/delete-package-versions@v4
+        with:
+          package-name: 'container-training.citytrip'
+          package-type: 'container'
+          min-versions-to-keep: 1
+          delete-only-untagged-versions: 'true'
+      - uses: actions/delete-package-versions@v4
+        with:
+          package-name: 'container-training.tools'
+          package-type: 'container'
+          min-versions-to-keep: 1
+          delete-only-untagged-versions: 'true'
+      - uses: actions/delete-package-versions@v4
+        with:
+          package-name: 'shellinabox'
+          package-type: 'container'
+          min-versions-to-keep: 1
           delete-only-untagged-versions: 'true'
