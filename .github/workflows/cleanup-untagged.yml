@@ -1,6 +1,10 @@
 name: Cleaup untagged images
 on:
   workflow_dispatch:
+
+permissions: 
+  packages: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
