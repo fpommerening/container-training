@@ -11,43 +11,43 @@ jobs:
     steps:  
       - uses: actions/delete-package-versions@v4
         with:
-          package-name: 'webapp'
+          package-name: 'container-training.webapp'
           package-type: 'container'
-          min-versions-to-keep: 1
+          min-versions-to-keep: 0
           delete-only-untagged-versions: 'true'
-      - uses: actions/delete-package-versions@v4
-        with:
-            package-name: 'codeserver'
-            package-type: 'container'
-            min-versions-to-keep: 1
-            delete-only-untagged-versions: 'true'
       - uses: actions/delete-package-versions@v4
         with:
             package-name: 'container-training.utils'
             package-type: 'container'
-            min-versions-to-keep: 1
+            min-versions-to-keep: 0
             delete-only-untagged-versions: 'true'
       - uses: actions/delete-package-versions@v4
         with:
           package-name: 'container-training.coffeemaker'
           package-type: 'container'
-          min-versions-to-keep: 1
+          min-versions-to-keep: 0
           delete-only-untagged-versions: 'true'
       - uses: actions/delete-package-versions@v4
         with:
           package-name: 'container-training.citytrip'
           package-type: 'container'
-          min-versions-to-keep: 1
+          min-versions-to-keep: 0
           delete-only-untagged-versions: 'true'
       - uses: actions/delete-package-versions@v4
         with:
           package-name: 'container-training.tools'
           package-type: 'container'
-          min-versions-to-keep: 1
+          min-versions-to-keep: 0
           delete-only-untagged-versions: 'true'
       - uses: actions/delete-package-versions@v4
         with:
           package-name: 'shellinabox'
           package-type: 'container'
-          min-versions-to-keep: 1
+          min-versions-to-keep: 0
+          delete-only-untagged-versions: 'true'
+      - uses: actions/delete-package-versions@v4
+        with:
+          package-name: 'codeserver'
+          package-type: 'container'
+          min-versions-to-keep: 0
           delete-only-untagged-versions: 'true'
