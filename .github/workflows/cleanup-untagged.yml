@@ -17,19 +17,19 @@ jobs:
           delete-only-untagged-versions: 'true'
       - uses: actions/delete-package-versions@v4
         with:
-            package-name: 'monitoring-for-devops'
+            package-name: 'codeserver'
             package-type: 'container'
             min-versions-to-keep: 1
             delete-only-untagged-versions: 'true'
       - uses: actions/delete-package-versions@v4
         with:
-            package-name: 'kxs-for-developers'
+            package-name: 'container-training.utils'
             package-type: 'container'
             min-versions-to-keep: 1
             delete-only-untagged-versions: 'true'
       - uses: actions/delete-package-versions@v4
         with:
-          package-name: 'kxs-for-developers'
+          package-name: 'container-training.coffeemaker'
           package-type: 'container'
           min-versions-to-keep: 1
           delete-only-untagged-versions: 'true'
