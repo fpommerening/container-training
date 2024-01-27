@@ -1,6 +1,8 @@
 name: Cleaup untagged images
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "0 22 * * *"
 
 permissions: 
   packages: write
