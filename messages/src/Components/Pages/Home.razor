@@ -1,0 +1,51 @@
+﻿@page "/"
+@using FP.ContainerTraining.Messages.Components.Models
+@using FP.ContainerTraining.Messages.Data
+
+@inject IMessageRepository MessageRepository;
+
+<PageTitle>Messages</PageTitle>
+
+<MudGrid>
+       <MudItem xs="12">
+              <MudTable Items="SortedData" Hover="true" Striped="true" Bordered="true" Breakpoint="Breakpoint.Sm">
+                     <HeaderContent>
+                            <MudTh>User</MudTh>
+                            <MudTh>Message</MudTh>
+                            <MudTh>Created at</MudTh>
+                            <MudTh></MudTh>
+                     </HeaderContent>
+                     <RowTemplate>
+                            <MudTd DataLabel="User">@context.User</MudTd>
+                            <MudTd DataLabel="Content">@context.Content</MudTd>
+                            <MudTd DataLabel="Timestamp">@context.Timestamp</MudTd>
+                     </RowTemplate>
+              </MudTable>
+       </MudItem>
+</MudGrid>
+
+@code {
+       
+       private List<MessageViewModel> _data = new();
+    
+       private IEnumerable<MessageViewModel> SortedData
+       {
+              get { return _data.OrderBy(x => x.Timestamp); }
+       }
+
+       protected override async Task OnInitializedAsync()
+       {
+              var messages = await MessageRepository.GetMessages();
+              _data = messages.Select(x => 
+                     new MessageViewModel
+                     {
+                            Timestamp = x.Timestamp,
+                            User = x.User,
+                            Content = x.Content
+                                   
+                     }).ToList();
+              await InvokeAsync(StateHasChanged);
+       }
+
+       
+}

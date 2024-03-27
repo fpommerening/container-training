@@ -1,0 +1,59 @@
+@page "/Message"
+@using FP.ContainerTraining.Messages.Components.Models
+@using FP.ContainerTraining.Messages.Data
+@inject IMessageRepository MessageRepository;
+@inject NavigationManager Navigation
+
+@if (Model == null)
+{
+    return;
+}
+
+<PageTitle>New Message</PageTitle>
+
+<MudGrid>
+    <MudItem xs="3"/>
+    <MudItem xs="6">
+        <MudTextField @bind-value="Model.User" T="string" Variant="Variant.Outlined" Label="User"></MudTextField>
+    </MudItem>
+    <MudItem xs="3"/>
+    <MudItem xs="3"/>
+        
+    <MudItem xs="6">
+        <MudTextField @bind-value="Model.Content" T="string" Variant="Variant.Outlined" Label="Content" Lines="5"></MudTextField>
+    </MudItem>
+    <MudItem xs="3"/>
+    <MudItem xs="6"/>
+    <MudItem xs="3">
+        <MudButton 
+            Variant="Variant.Filled" 
+            StartIcon="@Icons.Material.Filled.Save" 
+            IconColor="Color.Secondary" 
+            Size="Size.Large"
+            FullWidth="true"
+            OnClick="@SaveMessage">Save</MudButton>
+    </MudItem>
+    <MudItem xs="3"/>
+</MudGrid>
+
+@code {
+    private MessageViewModel? Model { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        Model = new MessageViewModel
+        {
+            Timestamp = DateTime.Now
+        };
+    }
+
+    private async Task SaveMessage()
+    {
+        if (Model == null || string.IsNullOrEmpty(Model.Content) || string.IsNullOrEmpty(Model.User))
+        {
+            return;
+        }
+        await MessageRepository.SaveMessage(Model.User, Model.Content);
+        Navigation.NavigateTo("/");
+    }
+}
