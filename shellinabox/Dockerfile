@@ -36,6 +36,7 @@ COPY --from=tools /tools/helm/helm /usr/local/bin/helm
 COPY --from=tools /tools/linkerd/linkerd /usr/local/bin/linkerd 
 COPY --from=tools /tools/docker/docker /usr/local/bin/docker 
 COPY --from=tools /tools/docker/docker-compose /usr/local/lib/docker/cli-plugins/docker-compose 
+COPY --from=tools /tools/docker/docker-buildx /usr/local/lib/docker/cli-plugins/docker-buildx 
 ADD entrypoint.sh /usr/local/sbin/
 
 RUN apt-get update && apt-get install -y openssl curl openssh-client shellinabox git tmux && \
