@@ -31,10 +31,10 @@ jobs:
         dotnet build --no-restore healthcheck/src/Healthcheck.csproj
     - name: Publish
       run: |
-        dotnet publish -c release -r linux-x64 --no-self-contained -o healthcheck/amd64 messages/src/Healthcheck.csproj
+        dotnet publish -c release -r linux-x64 --no-self-contained -o healthcheck/amd64 healthcheck/src/Healthcheck.csproj
     - name: Publish
       run: |
-        dotnet publish -c release -r linux-arm64 --no-self-contained -o healthcheck/arm64 messages/src/Healthcheck.csproj
+        dotnet publish -c release -r linux-arm64 --no-self-contained -o healthcheck/arm64 healthcheck/src/Healthcheck.csproj
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v3
