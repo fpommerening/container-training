@@ -27,6 +27,7 @@ builder.Services.AddSingleton<IWorkerRepository,WorkerRepository>();
 builder.Services.AddSingleton<IJobRepository,JobRepository>();
 builder.Services.AddHostedService<HeartbeatService>();
 builder.Services.AddHostedService<JobService>();
+builder.Configuration.AddEnvironmentVariables();
 
 var app = builder.Build();
 
@@ -40,12 +41,10 @@ if (!app.Environment.IsDevelopment())
 
 app.UseStaticFiles();
 
-
 app.UseRouting();
 app.UseAntiforgery();
 app.MapGrpcService<WorkerService>();
 app.UseOpenTelemetryPrometheusScrapingEndpoint();
-
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
