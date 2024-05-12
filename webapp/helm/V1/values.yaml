@@ -1,0 +1,12 @@
+
+image:
+  repository: ghcr.io/fpommerening/container-training.webapp
+  tag: 1.0.0
+
+ingressRoute:
+  enabled: false
+  entryPoint: web
+  host: webapp-example.local
+
+probe:
+  enabled: false
