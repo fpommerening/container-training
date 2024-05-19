@@ -36,6 +36,22 @@ jobs:
          images: ${{ env.REGISTRY }}/${{ github.actor }}/${{ env.IMAGE_NAME }}
          tags: |
            type=raw,value=1.0.0
+    - name: Extract metadata (tags, labels) for Docker v2
+      id: meta-v2
+      uses: docker/metadata-action@v5
+      with:
+        images: ${{ env.REGISTRY }}/${{ github.actor }}/${{ env.IMAGE_NAME }}
+        tags: |
+          type=raw,value=2.0.0
+    - name: Extract metadata (tags, labels) for Docker v3
+      id: meta-v3
+      uses: docker/metadata-action@v5
+      with:
+        images: ${{ env.REGISTRY }}/${{ github.actor }}/${{ env.IMAGE_NAME }}
+        tags: |
+          type=raw,value=3.0.0
+
+
     - name: Build and push v1
       uses: docker/build-push-action@v5
       with:
@@ -45,29 +61,7 @@ jobs:
         push: true
         tags: ${{ steps.meta-v1.outputs.tags }}
         labels: ${{ steps.meta-v1.outputs.labels }}
-    - name: Extract metadata (tags, labels) for Docker v2
-      id: meta-v2
-      uses: docker/metadata-action@v5
-      with:
-         images: ${{ env.REGISTRY }}/${{ github.actor }}/${{ env.IMAGE_NAME }}
-         tags: |
-           type=raw,value=2.0.0
-    - name: Build and push v2
-      uses: docker/build-push-action@v5
-      with:
-        context: ./webapp/v2
-        provenance: false
-        platforms: linux/amd64,linux/arm64,linux/arm/v7
-        push: true
-        tags: ${{ steps.meta-v2.outputs.tags }}
-        labels: ${{ steps.meta-v2.outputs.labels }}
-    - name: Extract metadata (tags, labels) for Docker v3
-      id: meta-v3
-      uses: docker/metadata-action@v5
-      with:
-         images: ${{ env.REGISTRY }}/${{ github.actor }}/${{ env.IMAGE_NAME }}
-         tags: |
-           type=raw,value=3.0.0
+   
     - name: Build and push v3
       uses: docker/build-push-action@v5
       with:
@@ -77,3 +71,13 @@ jobs:
         push: true
         tags: ${{ steps.meta-v3.outputs.tags }}
         labels: ${{ steps.meta-v3.outputs.labels }}
+    
+    - name: Build and push v2
+      uses: docker/build-push-action@v5
+      with:
+        context: ./webapp/v2
+        provenance: false
+        platforms: linux/amd64,linux/arm64,linux/arm/v7
+        push: true
+        tags: ${{ steps.meta-v2.outputs.tags }}
+        labels: ${{ steps.meta-v2.outputs.labels }}
