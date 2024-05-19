@@ -61,14 +61,14 @@ jobs:
         push: true
         tags: ${{ steps.meta-v2.outputs.tags }}
         labels: ${{ steps.meta-v2.outputs.labels }}
-    - name: Extract metadata (tags, labels) for Docker
+    - name: Extract metadata (tags, labels) for Docker v3
       id: meta-v3
       uses: docker/metadata-action@v5
       with:
          images: ${{ env.REGISTRY }}/${{ github.actor }}/${{ env.IMAGE_NAME }}
          tags: |
            type=raw,value=3.0.0
-    - name: Build and push v2
+    - name: Build and push v3
       uses: docker/build-push-action@v5
       with:
         context: ./webapp/v3
