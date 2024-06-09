@@ -10,8 +10,18 @@ permissions:
   packages: write
 
 jobs:
-  build:
+  build-v1:
     uses: ./.github/workflows/build-webapp-common.yml
     with:
       image-version: type=raw,value=1.0.0
       build-context: ./webapp/v1
+  build-v2:
+    uses: ./.github/workflows/build-webapp-common.yml
+    with:
+      image-version: type=raw,value=2.0.0
+      build-context: ./webapp/v2
+  build-3:
+    uses: ./.github/workflows/build-webapp-common.yml
+    with:
+      image-version: type=raw,value=3.0.0
+      build-context: ./webapp/v3
