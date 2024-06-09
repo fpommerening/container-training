@@ -1,4 +1,4 @@
-name: Build WebApp
+name: Build WebApp Common
 on:
   workflow_call:
     inputs:
