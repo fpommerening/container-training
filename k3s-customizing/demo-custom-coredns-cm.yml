@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: custom-coredns
+  namespace: kube-system
+data:
+  Corefile: |
+    demo:53 {
+      errors
+      cache 30
+      forward . 85.215.36.94:30053
+    }  
