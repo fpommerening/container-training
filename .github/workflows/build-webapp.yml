@@ -6,6 +6,9 @@ on:
     paths:
       - 'webapp/**'
 
+permissions: 
+  packages: write
+
 jobs:
   build:
     uses: ./.github/workflows/build-webapp-common.yml
