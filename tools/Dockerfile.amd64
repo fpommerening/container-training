@@ -1,4 +1,4 @@
-FROM ubuntu:22.04 as download
+FROM ubuntu:24.04 as download
 
 RUN apt-get update && apt-get install -y curl sudo git apt-transport-https gnupg wget unzip
 RUN sudo curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
