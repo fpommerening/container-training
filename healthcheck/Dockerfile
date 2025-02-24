@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/aspnet:8.0-bookworm-slim
+FROM mcr.microsoft.com/dotnet/aspnet:9.0-bookworm-slim
 ARG TARGETARCH
 EXPOSE 8080/TCP
 WORKDIR /app/
