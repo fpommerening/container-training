@@ -8,5 +8,10 @@ data:
     workshop:53 {
       errors
       cache 30
-      forward . 85.215.36.94:30053
-    }  
+      forward . 85.215.36.94
+    } 
+    vpn:53 {
+      errors
+      cache 30
+      forward . 85.215.36.94
+    }
