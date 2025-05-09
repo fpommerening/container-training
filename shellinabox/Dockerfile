@@ -25,8 +25,7 @@ VOLUME /etc/shellinabox /var/log/supervisor /home
 ENTRYPOINT ["entrypoint.sh"]
 CMD ["shellinabox"]
 
-RUN userdel "$(id -un 1000)" &&  groupdel "$(id -un 1000)"
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN userdel "$(id -un 1000)" && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN mkdir /usr/local/lib/docker && mkdir /usr/local/lib/docker/cli-plugins
 
 COPY --from=tools /tools/kubectl/kubectl /usr/local/bin/kubectl 
