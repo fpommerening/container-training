@@ -1,6 +1,6 @@
 FROM ghcr.io/fpommerening/container-training.tools:linux-${TARGETARCH} as tools
 
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 ENV SIAB_USERCSS="Normal:+/etc/shellinabox/options-enabled/00+Black-on-White.css,Reverse:-/etc/shellinabox/options-enabled/00_White-On-Black.css;Colors:+/etc/shellinabox/options-enabled/01+Color-Terminal.css,Monochrome:-/etc/shellinabox/options-enabled/01_Monochrome.css" \
     SIAB_PORT=4200 \
