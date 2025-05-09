@@ -3,7 +3,7 @@ FROM ubuntu:24.04 as download
 RUN apt-get update && apt-get install -y curl sudo git apt-transport-https gnupg wget unzip
 RUN sudo curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 RUN sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-RUN wget 'https://github.com/derailed/k9s/releases/download/v0.32.5/k9s_Linux_amd64.tar.gz' && \
+RUN wget 'https://github.com/derailed/k9s/releases/download/v0.50.5/k9s_Linux_amd64.tar.gz' && \
     mkdir /tmp/k9s/ && tar -xvf k9s_Linux_amd64.tar.gz -C /tmp/k9s/ && \
     mv /tmp/k9s/k9s /usr/local/bin/k9s
 
@@ -18,15 +18,15 @@ RUN wget https://get.helm.sh/helm-v3.14.3-linux-amd64.tar.gz && \
 RUN wget 'https://github.com/linkerd/linkerd2/releases/download/stable-2.14.10/linkerd2-cli-stable-2.14.10-linux-amd64' && \
     chmod +x linkerd2-cli-stable-2.14.10-linux-amd64 &&  mv linkerd2-cli-stable-2.14.10-linux-amd64 /usr/local/bin/linkerd
 
-RUN wget https://download.docker.com/linux/static/stable/x86_64/docker-27.0.2.tgz && \
-    mkdir /tmp/docker && tar -xvf docker-27.0.2.tgz -C /tmp/docker && \  
+RUN wget https://download.docker.com/linux/static/stable/x86_64/docker-28.1.1.tgz && \
+    mkdir /tmp/docker && tar -xvf docker-28.1.1.tgz -C /tmp/docker && \  
     mv /tmp/docker/docker/docker /usr/local/bin/docker
 
 RUN mkdir /usr/local/lib/docker/ && mkdir /usr/local/lib/docker/cli-plugins && \
-	curl -SL https://github.com/docker/compose/releases/download/v2.28.1/docker-compose-linux-x86_64 -o /usr/local/lib/docker/cli-plugins/docker-compose && \
+	curl -SL https://github.com/docker/compose/releases/download/v2.36.0/docker-compose-linux-x86_64 -o /usr/local/lib/docker/cli-plugins/docker-compose && \
     chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
 
-RUN curl -SL https://github.com/docker/buildx/releases/download/v0.13.1/buildx-v0.13.1.linux-amd64 -o /usr/local/lib/docker/cli-plugins/docker-buildx && \
+RUN curl -SL https://github.com/docker/buildx/releases/download/v0.23.0/buildx-v0.23.0.linux-amd64 -o /usr/local/lib/docker/cli-plugins/docker-buildx && \
     chmod +x /usr/local/lib/docker/cli-plugins/docker-buildx
 
 RUN wget 'https://github.com/int128/kubelogin/releases/download/v1.28.0/kubelogin_linux_amd64.zip' && \
