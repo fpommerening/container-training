@@ -25,6 +25,7 @@ VOLUME /etc/shellinabox /var/log/supervisor /home
 ENTRYPOINT ["entrypoint.sh"]
 CMD ["shellinabox"]
 
+RUN userdel -r "$(id -un 1000)" &&  groupdel -r "$(id -un 1000)"
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN mkdir /usr/local/lib/docker && mkdir /usr/local/lib/docker/cli-plugins
 
