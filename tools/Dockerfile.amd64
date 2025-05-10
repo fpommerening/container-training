@@ -11,8 +11,8 @@ RUN wget 'https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.26
     mkdir /tmp/kubeseal/ && tar -xvf kubeseal-0.26.1-linux-amd64.tar.gz -C /tmp/kubeseal/ && \
     mv /tmp/kubeseal/kubeseal /usr/local/bin/kubeseal
 
-RUN wget https://get.helm.sh/helm-v3.14.3-linux-amd64.tar.gz && \
-    mkdir /tmp/helm && tar -xvf helm-v3.14.3-linux-amd64.tar.gz -C /tmp/helm && \  
+RUN wget https://get.helm.sh/helm-v3.17.3-linux-amd64.tar.gz && \
+    mkdir /tmp/helm && tar -xvf helm-v3.17.3-linux-amd64.tar.gz -C /tmp/helm && \  
     mv /tmp/helm/linux-amd64/helm /usr/local/bin/helm
 
 RUN wget 'https://github.com/linkerd/linkerd2/releases/download/stable-2.14.10/linkerd2-cli-stable-2.14.10-linux-amd64' && \
