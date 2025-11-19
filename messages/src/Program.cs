@@ -18,6 +18,9 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
 }
+
+app.MapGet("/time", () => DateTimeOffset.Now);
+
 app.UseAntiforgery();
 app.UseStaticFiles();
 app.MapRazorComponents<App>()
