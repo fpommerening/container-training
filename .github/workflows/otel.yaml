@@ -1,0 +1,25 @@
+name: Otel Monitoring
+
+on:
+  workflow_run:
+    workflows:
+      - "Build WebApp"
+    types:
+      - completed
+
+permissions:
+  contents: read
+  actions: read
+  checks: read
+
+jobs:
+  otel-cicd-actions:
+    name: Send CI Telemetry
+    runs-on: ubuntu-latest
+    steps:
+       - uses: corentinmusard/otel-cicd-action@v4
+         with:
+           otelServiceName: "GitHub-Actions"
+           otlpEndpoint: grpc://otlp.container-training.de:443
+           githubToken: ${{ secrets.GITHUB_TOKEN }}
+           runId: ${{ github.event.workflow_run.id }}
