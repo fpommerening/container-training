@@ -7,7 +7,7 @@ RUN wget 'https://github.com/derailed/k9s/releases/download/v0.50.18/k9s_Linux_a
     mkdir /tmp/k9s/ && tar -xvf k9s_Linux_amd64.tar.gz -C /tmp/k9s/ && \
     mv /tmp/k9s/k9s /usr/local/bin/k9s
 
-RUN wget 'https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.36.6/kubeseal-036.6-linux-amd64.tar.gz' && \
+RUN wget 'https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.36.6/kubeseal-0.36.6-linux-amd64.tar.gz' && \
     mkdir /tmp/kubeseal/ && tar -xvf kubeseal-0.36.6-linux-amd64.tar.gz -C /tmp/kubeseal/ && \
     mv /tmp/kubeseal/kubeseal /usr/local/bin/kubeseal
 
