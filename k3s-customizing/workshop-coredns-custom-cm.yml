@@ -5,12 +5,12 @@ metadata:
   namespace: kube-system
 data:
   workshop.server: |
-    workshop:53 {
+    workshop.nm.internal:53 {
       errors
       cache 30
       forward . 31.70.86.126
     } 
-    vpn:53 {
+    vpn.nm.internal:53 {
       errors
       cache 30
       forward . 31.70.86.126
