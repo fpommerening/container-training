@@ -1,4 +1,4 @@
-name: Build Utils
+name: Build OpenCode + OpenSpec + .NET 10
 on:
   workflow_dispatch:
   push:
