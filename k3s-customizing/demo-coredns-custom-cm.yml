@@ -8,10 +8,10 @@ data:
     demo:53 {
       errors
       cache 30
-      forward . 85.215.36.94
+      forward . 31.70.86.126
     }
     vpn:53 {
       errors
       cache 30
-      forward . 85.215.36.94
+      forward . 31.70.86.126
     }
